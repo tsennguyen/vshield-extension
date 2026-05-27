@@ -20,8 +20,10 @@ function normalizePhone(raw) {
 // ── URL safety check ──────────────────────────────────────────
 async function checkUrl(url) {
   try {
-    const res = await fetch(`${API_BASE}/verify/url?url=${encodeURIComponent(url)}`);
-    if (!res.ok) return { safe: true, score: 0, reports: 0, status: 'unknown', is_blacklisted: false };
+    const res = await fetch(`${API_BASE}/verify/url?url=${encodeURIComponent(url)}`, {
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return null; // API error → show "Không thể kiểm tra"
     const data = await res.json();
     return {
       safe: !data.is_blacklisted,
@@ -32,7 +34,7 @@ async function checkUrl(url) {
       display_value: data.display_value ?? '',
     };
   } catch {
-    return null; // network error
+    return null; // network error / timeout
   }
 }
 
@@ -42,8 +44,8 @@ async function checkPhone(phone) {
     const normalized = normalizePhone(phone);
     if (normalized.length < 9) return null;
     const hash = await sha256(normalized);
-    const res = await fetch(`${API_BASE}/verify/phone/${hash}`);
-    if (!res.ok) return { safe: true, score: 0, reports: 0, is_blacklisted: false };
+    const res = await fetch(`${API_BASE}/verify/phone/${hash}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
     const data = await res.json();
     return {
       safe: !data.is_blacklisted,
@@ -61,8 +63,8 @@ async function checkPhone(phone) {
 async function checkBank(account) {
   try {
     const hash = await sha256(account.trim());
-    const res = await fetch(`${API_BASE}/verify/bank/${hash}`);
-    if (!res.ok) return { safe: true, score: 0, reports: 0, is_blacklisted: false };
+    const res = await fetch(`${API_BASE}/verify/bank/${hash}`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
     const data = await res.json();
     return {
       safe: !data.is_blacklisted,
