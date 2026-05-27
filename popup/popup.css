@@ -171,6 +171,7 @@ body {
 .check-result--warning { background: rgba(245,158,11,0.08); border: 1.5px solid rgba(245,158,11,0.2); }
 .check-result--danger  { background: rgba(239,68,68,0.08); border: 1.5px solid rgba(239,68,68,0.2); }
 .check-result--error   { background: rgba(100,116,139,0.08); border: 1.5px solid #1f2937; }
+.check-result--unknown { background: rgba(96,165,250,0.06); border: 1.5px solid rgba(96,165,250,0.15); }
 
 .result-icon { font-size: 1.25rem; flex-shrink: 0; }
 .result-title { font-weight: 700; font-size: 0.85rem; }
@@ -178,6 +179,7 @@ body {
 .check-result--warning .result-title { color: #fbbf24; }
 .check-result--danger .result-title  { color: #f87171; }
 .check-result--error .result-title   { color: #94a3b8; }
+.check-result--unknown .result-title { color: #93c5fd; }
 .result-detail { font-size: 0.72rem; color: #94a3b8; margin-top: 1px; }
 
 @keyframes slideIn {

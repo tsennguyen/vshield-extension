@@ -52,24 +52,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
-      if (result.safe) {
-        statusEl.className = 'page-status page-status--safe';
-        statusIcon.textContent = '✅';
-        statusLabel.textContent = 'Trang web an toàn';
-        if (statusDetail) statusDetail.textContent = 'Không có trong danh sách đen VShield';
-        if (reportBtn) reportBtn.hidden = true;
-      } else if (result.score >= 80) {
+      if (result.is_blacklisted && result.score >= 70) {
         statusEl.className = 'page-status page-status--danger';
         statusIcon.textContent = '🚨';
         statusLabel.textContent = 'NGUY HIỂM!';
         if (statusDetail) statusDetail.textContent = `${result.reports} báo cáo · Điểm: ${result.score}/100`;
         if (reportBtn) reportBtn.hidden = false;
-      } else {
+      } else if (result.is_blacklisted || result.reports > 0) {
         statusEl.className = 'page-status page-status--warning';
         statusIcon.textContent = '⚠️';
         statusLabel.textContent = 'Đáng ngờ';
         if (statusDetail) statusDetail.textContent = `${result.reports} báo cáo · Điểm: ${result.score}/100`;
         if (reportBtn) reportBtn.hidden = false;
+      } else {
+        statusEl.className = 'page-status page-status--unknown';
+        statusIcon.textContent = '📋';
+        statusLabel.textContent = 'Chưa có dữ liệu';
+        if (statusDetail) statusDetail.textContent = 'Không tìm thấy báo cáo trong hệ thống VShield';
+        if (reportBtn) reportBtn.hidden = true;
       }
     });
   } else {
@@ -144,15 +144,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
-      if (result.safe) {
-        resultEl.className = 'check-result check-result--safe';
-        resultEl.innerHTML = `<div class="result-icon">✅</div><div><div class="result-title">An toàn</div><div class="result-detail">Không có trong danh sách đen VShield</div></div>`;
-      } else if (result.score >= 80) {
+      if (result.is_blacklisted && result.score >= 70) {
         resultEl.className = 'check-result check-result--danger';
         resultEl.innerHTML = `<div class="result-icon">🚨</div><div><div class="result-title">NGUY HIỂM!</div><div class="result-detail">${result.reports} báo cáo · Điểm nguy hiểm: ${result.score}/100</div></div>`;
-      } else {
+      } else if (result.is_blacklisted || result.reports > 0) {
         resultEl.className = 'check-result check-result--warning';
         resultEl.innerHTML = `<div class="result-icon">⚠️</div><div><div class="result-title">Đáng ngờ</div><div class="result-detail">${result.reports} báo cáo · Điểm: ${result.score}/100</div></div>`;
+      } else {
+        resultEl.className = 'check-result check-result--unknown';
+        resultEl.innerHTML = `<div class="result-icon">📋</div><div><div class="result-title">Chưa có dữ liệu</div><div class="result-detail">Không tìm thấy trong hệ thống VShield. Không đảm bảo an toàn.</div></div>`;
       }
     });
   };

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "VShield — Chống Lừa Đảo",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Tự động kiểm tra URL, số điện thoại, tài khoản ngân hàng ngay trên trình duyệt. Cảnh báo realtime các trang web lừa đảo.",
   "permissions": [
     "tabs",

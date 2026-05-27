@@ -83,16 +83,25 @@ async function updateBadge(tabId, result) {
     return;
   }
 
-  if (result.safe) {
-    await chrome.action.setBadgeText({ text: '✓', tabId });
-    await chrome.action.setBadgeBackgroundColor({ color: '#22c55e', tabId });
-  } else if (result.score >= 80) {
+  // Dangerous: blacklisted with high score
+  if (result.is_blacklisted && result.score >= 70) {
     await chrome.action.setBadgeText({ text: '✗', tabId });
     await chrome.action.setBadgeBackgroundColor({ color: '#ef4444', tabId });
-  } else {
+    await chrome.action.setTitle({ title: `VShield: NGUY HIỂM — ${result.reports} báo cáo`, tabId });
+    return;
+  }
+
+  // Suspicious: blacklisted or has reports
+  if (result.is_blacklisted || result.reports > 0) {
     await chrome.action.setBadgeText({ text: '!', tabId });
     await chrome.action.setBadgeBackgroundColor({ color: '#f59e0b', tabId });
+    await chrome.action.setTitle({ title: `VShield: Đáng ngờ — ${result.reports} báo cáo`, tabId });
+    return;
   }
+
+  // No data — don't show green (no data ≠ safe)
+  await chrome.action.setBadgeText({ text: '', tabId });
+  await chrome.action.setTitle({ title: 'VShield — Chưa có dữ liệu', tabId });
 }
 
 // ── Increment scan counter ───────────────────────────────────
