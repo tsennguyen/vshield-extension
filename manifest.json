@@ -9,7 +9,7 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://vshield-api.onrender.com/*"
+    "https://vshield-v2.onrender.com/*"
   ],
   "action": {
     "default_popup": "popup/popup.html",

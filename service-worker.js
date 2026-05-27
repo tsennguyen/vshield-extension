@@ -1,7 +1,7 @@
 // VShield Chrome Extension v2.0 — Service Worker (Manifest V3)
 // Ephemeral — all state persisted in chrome.storage
 
-const API_BASE = 'https://vshield-api.onrender.com/api/v1';
+const API_BASE = 'https://vshield-v2.onrender.com/v1';
 
 // ── SHA-256 via Web Crypto ──────────────────────────────────────
 async function sha256(text) {
