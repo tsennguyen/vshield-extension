@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "VShield — Chống Lừa Đảo",
-  "version": "1.0.0",
-  "description": "Kiểm tra URL, số điện thoại, tài khoản ngân hàng ngay trên trình duyệt. Bảo vệ khỏi lừa đảo trực tuyến.",
+  "version": "2.0.0",
+  "description": "Tự động kiểm tra URL, số điện thoại, tài khoản ngân hàng ngay trên trình duyệt. Cảnh báo realtime các trang web lừa đảo.",
   "permissions": [
     "tabs",
     "storage",
@@ -13,7 +13,7 @@
   ],
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "VShield — Kiểm tra URL"
+    "default_title": "VShield — Kiểm tra an toàn"
   },
   "background": {
     "service_worker": "service-worker.js"
@@ -24,5 +24,10 @@
       "js": ["content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
 }
