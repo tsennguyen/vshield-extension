@@ -1,0 +1,121 @@
+/* VShield Chrome Extension — Popup Styles */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-width: 360px;
+  max-width: 360px;
+}
+
+.popup { padding: 16px; }
+
+/* Header */
+.popup-header { margin-bottom: 16px; }
+.popup-brand { display: flex; align-items: center; gap: 10px; }
+.popup-title {
+  font-size: 1.1rem; font-weight: 800; color: #f1f5f9;
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+.popup-subtitle { font-size: 0.7rem; color: #64748b; }
+
+/* Page Status */
+.page-status {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.page-status--loading { background: #1e293b; border-color: #334155; }
+.page-status--safe    { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); }
+.page-status--warning { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); }
+.page-status--danger  { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
+.page-status--unknown { background: #1e293b; border-color: #334155; }
+
+.status-icon { font-size: 1.5rem; flex-shrink: 0; }
+.status-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.status-label { font-weight: 700; font-size: 0.85rem; }
+.status-url {
+  font-size: 0.7rem; color: #94a3b8;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.page-status--safe .status-label    { color: #22c55e; }
+.page-status--warning .status-label { color: #f59e0b; }
+.page-status--danger .status-label  { color: #ef4444; }
+
+/* Tab Group */
+.tab-group {
+  display: flex; gap: 4px; margin-bottom: 10px;
+  background: #1e293b; border-radius: 10px; padding: 3px;
+}
+.tab-btn {
+  flex: 1; padding: 7px 0; border: none; border-radius: 8px;
+  background: transparent; color: #94a3b8;
+  font-size: 0.78rem; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; font-family: inherit;
+}
+.tab-btn:hover { color: #e2e8f0; }
+.tab-btn--active {
+  background: #2E5FA3; color: white;
+  box-shadow: 0 2px 8px rgba(46,95,163,0.3);
+}
+
+/* Input */
+.input-group { display: flex; gap: 8px; margin-bottom: 12px; }
+.check-input {
+  flex: 1; padding: 10px 12px;
+  background: #1e293b; border: 1.5px solid #334155;
+  border-radius: 10px; color: #f1f5f9;
+  font-size: 0.85rem; outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.check-input:focus { border-color: #2E5FA3; }
+.check-input::placeholder { color: #475569; }
+
+.check-btn {
+  padding: 10px 16px; border: none; border-radius: 10px;
+  background: #2E5FA3; color: white;
+  font-weight: 700; font-size: 0.8rem; cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.check-btn:hover:not(:disabled) { background: #1B3A5C; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Result */
+.check-result {
+  padding: 12px; border-radius: 10px;
+  font-size: 0.8rem; line-height: 1.5;
+  animation: fadeIn 0.2s ease-out;
+}
+.check-result--safe    { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+.check-result--warning { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+.check-result--danger  { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
+.check-result--error   { background: rgba(100,116,139,0.1); color: #94a3b8; border: 1px solid #334155; }
+
+.result-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 4px; }
+.result-detail { font-size: 0.75rem; opacity: 0.85; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer */
+.popup-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 12px; border-top: 1px solid #1e293b;
+  margin-top: 4px;
+}
+.footer-link {
+  color: #60a5fa; font-size: 0.75rem; font-weight: 600;
+  text-decoration: none;
+}
+.footer-link:hover { text-decoration: underline; }
+.footer-version { font-size: 0.65rem; color: #475569; }
