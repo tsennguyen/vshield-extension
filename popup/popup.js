@@ -52,6 +52,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
+      if (result.error === 'rate_limited') {
+        statusEl.className = 'page-status page-status--unknown';
+        statusIcon.textContent = '⏳';
+        statusLabel.textContent = 'Bị giới hạn';
+        if (statusDetail) statusDetail.textContent = 'Quá nhiều request. Thử lại sau 1 phút.';
+        return;
+      }
+
       if (result.is_blacklisted && result.score >= 70) {
         statusEl.className = 'page-status page-status--danger';
         statusIcon.textContent = '🚨';
@@ -141,6 +149,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!result) {
         resultEl.className = 'check-result check-result--error';
         resultEl.innerHTML = '<div class="result-icon">❌</div><div><div class="result-title">Lỗi kết nối</div><div class="result-detail">Không thể kết nối máy chủ VShield</div></div>';
+        return;
+      }
+
+      if (result.error === 'rate_limited') {
+        resultEl.className = 'check-result check-result--error';
+        resultEl.innerHTML = '<div class="result-icon">⏳</div><div><div class="result-title">Bị giới hạn</div><div class="result-detail">Quá nhiều request. Thử lại sau 1 phút.</div></div>';
         return;
       }
 

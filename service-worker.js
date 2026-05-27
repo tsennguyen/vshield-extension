@@ -23,6 +23,7 @@ async function checkUrl(url) {
     const res = await fetch(`${API_BASE}/verify/url?url=${encodeURIComponent(url)}`, {
       signal: AbortSignal.timeout(8000),
     });
+    if (res.status === 429) return { error: 'rate_limited' };
     if (!res.ok) return null; // API error → show "Không thể kiểm tra"
     const data = await res.json();
     return {
